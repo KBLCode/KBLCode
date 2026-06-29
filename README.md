@@ -1,50 +1,51 @@
 <div align="center">
 
-<img src="./assets/header.svg" alt="KBLCode" width="100%" />
-
-<br />
-
-`swe` &nbsp;//&nbsp; `rust + typescript` &nbsp;//&nbsp; `systems → product`
+<img src="./assets/header.svg" alt="KBLCode — swe // rust + typescript // systems → product" width="100%" />
 
 </div>
 
 <br />
 
-### tools
+<img src="./assets/metrics.svg" alt="27 stars · 5 public repos · 7 followers · 2 core languages" width="100%" />
 
-<p>
-  <img alt="Rust" src="https://img.shields.io/badge/Rust-0b0b0d?style=flat-square&logo=rust&logoColor=e0905a" />
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-0b0b0d?style=flat-square&logo=typescript&logoColor=e0905a" />
-  <img alt="React" src="https://img.shields.io/badge/React-0b0b0d?style=flat-square&logo=react&logoColor=e0905a" />
-  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-0b0b0d?style=flat-square&logo=nextdotjs&logoColor=e0905a" />
-  <img alt="Tauri" src="https://img.shields.io/badge/Tauri-0b0b0d?style=flat-square&logo=tauri&logoColor=e0905a" />
-  <img alt="Node" src="https://img.shields.io/badge/Node-0b0b0d?style=flat-square&logo=nodedotjs&logoColor=e0905a" />
-  <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-0b0b0d?style=flat-square&logo=tailwindcss&logoColor=e0905a" />
-  <img alt="Python" src="https://img.shields.io/badge/Python-0b0b0d?style=flat-square&logo=python&logoColor=e0905a" />
-</p>
+<br />
+<br />
+
+### stack
+
+<img src="./assets/stack.svg" alt="Rust and TypeScript, with React, Next.js, Astro, Tauri, Node, Tailwind, WebGL, Python and more" width="100%" />
+
+<br />
 
 ### open source
 
 <a href="https://github.com/KBLCode/greppy">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=KBLCode&repo=greppy&hide_border=true&bg_color=00000000&title_color=e0905a&icon_color=e0905a&text_color=9aa0a6" />
-</a>
-<a href="https://github.com/KBLCode/ContextMap">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=KBLCode&repo=ContextMap&hide_border=true&bg_color=00000000&title_color=e0905a&icon_color=e0905a&text_color=9aa0a6" />
+  <img src="./assets/greppy.svg" alt="greppy — sub-millisecond local semantic code search · 27 stars · Rust · MIT" width="100%" />
 </a>
 
-### stats
+<br />
+<br />
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=KBLCode&show_icons=true&count_private=false&hide_border=true&bg_color=00000000&title_color=e0905a&icon_color=e0905a&text_color=9aa0a6" />
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=KBLCode&layout=compact&langs_count=8&hide_border=true&bg_color=00000000&title_color=e0905a&text_color=9aa0a6&exclude_repo=jarvis,workflow-tools" />
+### how i work
+
+> **fast is a feature.** &nbsp;no spinners, no waiting. latency is a design constraint, not an afterthought.
+>
+> **metal to ui.** &nbsp;systems in rust, products in typescript — the whole stack, end to end.
+>
+> **tools that get used.** &nbsp;ship the thing people reach for daily, not the demo.
+
+<br />
 
 ### contributions
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/KBLCode/KBLCode/output/github-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/KBLCode/KBLCode/output/github-snake.svg" />
-  <img alt="contribution snake" src="https://raw.githubusercontent.com/KBLCode/KBLCode/output/github-snake-dark.svg" />
+  <img alt="contribution snake" src="https://raw.githubusercontent.com/KBLCode/KBLCode/output/github-snake-dark.svg" width="100%" />
 </picture>
 
 <br />
 
-<sub>`built in the open`</sub>
+<div align="center">
+  <sub><code>built in the open</code> &nbsp;·&nbsp; <a href="https://kblcode.github.io">kblcode.github.io</a></sub>
+</div>
