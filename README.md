@@ -5,7 +5,3 @@
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/KBLCode/KBLCode/output/github-snake.svg" />
   <img alt="contribution graph" src="https://raw.githubusercontent.com/KBLCode/KBLCode/output/github-snake-dark.svg" width="100%" />
 </picture>
-
-<div align="center">
-  <sub><a href="https://kblcode.github.io">kblcode.github.io</a></sub>
-</div>
