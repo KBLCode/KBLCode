@@ -1,67 +1,6 @@
-// === Daily self-updating profile asset. Renders ONE composed hero.svg from
-// === LIVE public GitHub data — wordmark + four stat numbers, animated.
-// === No deps. Fails loud — never writes a partial or empty SVG.
-import { writeFile, mkdir } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
-
-const USER = "KBLCode";
-const API = "https://api.github.com";
-const ASSETS = join(dirname(fileURLToPath(import.meta.url)), "..", "assets");
-
-// === fetch — timed out, authed if token present, throws on any non-200 ===
-async function gh(path) {
-  const headers = { "User-Agent": USER, Accept: "application/vnd.github+json" };
-  if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-  const res = await fetch(`${API}${path}`, { headers, signal: AbortSignal.timeout(15_000) });
-  if (!res.ok) throw new Error(`GitHub ${res.status} on ${path}`);
-  return res.json();
-}
-
-// === pull only PUBLIC, non-fork numbers — the firewall against leaking private repos ===
-async function collect() {
-  const user = await gh(`/users/${USER}`);
-  const repos = [];
-  for (let page = 1; page <= 5; page++) {
-    const batch = await gh(`/users/${USER}/repos?per_page=100&page=${page}&type=owner`);
-    repos.push(...batch);
-    if (batch.length < 100) break;
-  }
-  const pub = repos.filter((r) => !r.private && !r.fork);
-  const stars = pub.reduce((sum, r) => sum + (r.stargazers_count ?? 0), 0);
-  const langs = [...new Set(pub.map((r) => r.language).filter(Boolean))];
-  return {
-    followers: user.followers ?? 0,
-    publicRepos: pub.length,
-    stars,
-    coreLangs: langs.length,
-  };
-}
-
-// === the four stat columns. Fixed left-aligned x per column handles ANY small
-// === integer cleanly — single-digit and multi-digit numbers never collide. ===
-const COLS = [
-  { x: 84, lx: 86, key: "stars", label: "STARS EARNED", accent: false },
-  { x: 370, lx: 372, key: "publicRepos", label: "PUBLIC REPOS", accent: false },
-  { x: 640, lx: 642, key: "followers", label: "FOLLOWERS", accent: false },
-  { x: 910, lx: 912, key: "coreLangs", label: "CORE LANGUAGES", accent: true },
-];
-
-function heroSvg(d) {
-  const n = (k) => String(d[k] ?? 0);
-  const aria = `KBLCode — ${d.stars} stars earned, ${d.publicRepos} public repos, ${d.followers} followers, ${d.coreLangs} core languages`;
-  const desc = `${d.stars} stars earned · ${d.publicRepos} public repos · ${d.followers} followers · ${d.coreLangs} core languages`;
-  const stats = COLS.map((c, i) => {
-    const j = i + 1;
-    const fill = c.accent ? "#e0905a" : "#fafafa";
-    const lfill = c.accent ? "#9a6a48" : "#6a6f75";
-    return `      <g class="stat s${j}"><text x="${c.x}" y="284" font-size="100" font-weight="700" fill="${fill}">${n(c.key)}</text></g>
-      <g class="label l${j}"><text x="${c.lx}" y="314" font-size="12" letter-spacing="2.5" fill="${lfill}">${c.label}</text></g>`;
-  }).join("\n");
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" fill="none" role="img" aria-label="${aria}">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" fill="none" role="img" aria-label="KBLCode — 27 stars earned, 3 public repos, 7 followers, 3 core languages">
   <title>KBLCode</title>
-  <desc>${desc}</desc>
+  <desc>27 stars earned · 3 public repos · 7 followers · 3 core languages</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
       <stop offset="0" stop-color="#0c0c10"/>
@@ -177,7 +116,14 @@ function heroSvg(d) {
     <rect x="64.5" y="198.5" width="1071" height="127" rx="13.5" fill="none" stroke="#e0905a" stroke-opacity="0.10"/>
 
     <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" style="font-variant-numeric:tabular-nums">
-${stats}
+      <g class="stat s1"><text x="84" y="284" font-size="100" font-weight="700" fill="#fafafa">27</text></g>
+      <g class="label l1"><text x="86" y="314" font-size="12" letter-spacing="2.5" fill="#6a6f75">STARS EARNED</text></g>
+      <g class="stat s2"><text x="370" y="284" font-size="100" font-weight="700" fill="#fafafa">3</text></g>
+      <g class="label l2"><text x="372" y="314" font-size="12" letter-spacing="2.5" fill="#6a6f75">PUBLIC REPOS</text></g>
+      <g class="stat s3"><text x="640" y="284" font-size="100" font-weight="700" fill="#fafafa">7</text></g>
+      <g class="label l3"><text x="642" y="314" font-size="12" letter-spacing="2.5" fill="#6a6f75">FOLLOWERS</text></g>
+      <g class="stat s4"><text x="910" y="284" font-size="100" font-weight="700" fill="#e0905a">3</text></g>
+      <g class="label l4"><text x="912" y="314" font-size="12" letter-spacing="2.5" fill="#9a6a48">CORE LANGUAGES</text></g>
     </g>
 
     <g stroke="#ffffff" stroke-opacity="0.08" stroke-linecap="round">
@@ -187,18 +133,3 @@ ${stats}
     </g>
   </g>
 </svg>
-`;
-}
-
-async function main() {
-  const d = await collect();
-  if (d.publicRepos === 0) throw new Error("0 public repos returned — refusing to write empty hero");
-  await mkdir(ASSETS, { recursive: true });
-  await writeFile(join(ASSETS, "hero.svg"), heroSvg(d));
-  console.log(`generated · stars=${d.stars} repos=${d.publicRepos} followers=${d.followers} langs=${d.coreLangs}`);
-}
-
-main().catch((err) => {
-  console.error("generate failed:", err.message);
-  process.exit(1);
-});

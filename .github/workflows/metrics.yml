@@ -1,7 +1,7 @@
 name: metrics
 
-# Regenerate profile SVGs from LIVE public GitHub data, daily.
-# Commits only when an asset actually changes — no empty churn.
+# Regenerate the composed hero.svg from LIVE public GitHub data, daily.
+# Commits only when the asset actually changes — no empty churn.
 on:
   schedule:
     - cron: "17 6 * * *"
