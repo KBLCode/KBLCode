@@ -51,12 +51,17 @@ function heroSvg(d) {
   const n = (k) => String(d[k] ?? 0);
   const aria = `KBLCode — ${d.stars} stars earned, ${d.publicRepos} public repos, ${d.followers} followers, ${d.coreLangs} core languages`;
   const desc = `${d.stars} stars earned · ${d.publicRepos} public repos · ${d.followers} followers · ${d.coreLangs} core languages`;
+  // SMIL-only motion. Numbers are visible by default — GitHub strips <style>, so we
+  // must NEVER gate visibility on CSS. <animate> survives the README sanitizer.
   const stats = COLS.map((c, i) => {
-    const j = i + 1;
+    const begin = (0.25 + i * 0.15).toFixed(2);
     const fill = c.accent ? "#e0905a" : "#fafafa";
     const lfill = c.accent ? "#9a6a48" : "#6a6f75";
-    return `      <g class="stat s${j}"><text x="${c.x}" y="284" font-size="100" font-weight="700" fill="${fill}">${n(c.key)}</text></g>
-      <g class="label l${j}"><text x="${c.lx}" y="314" font-size="12" letter-spacing="2.5" fill="${lfill}">${c.label}</text></g>`;
+    return `      <g>
+        <text x="${c.x}" y="284" font-size="100" font-weight="700" fill="${fill}">${n(c.key)}</text>
+        <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="${begin}s" fill="freeze"/>
+      </g>
+      <text x="${c.lx}" y="314" font-size="12" letter-spacing="2.5" fill="${lfill}">${c.label}</text>`;
   }).join("\n");
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" fill="none" role="img" aria-label="${aria}">
@@ -95,20 +100,6 @@ function heroSvg(d) {
       <text x="80" y="142" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="72" font-weight="600" letter-spacing="-3" fill="#fff">KBLCode</text>
     </mask>
     <clipPath id="card"><rect width="1200" height="360" rx="18"/></clipPath>
-    <style>
-      @keyframes rise { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-      @keyframes draw { to { stroke-dashoffset:0; } }
-      .stat { opacity:0; animation:rise .7s cubic-bezier(0.16,1,0.3,1) forwards; }
-      .s1 { animation-delay:.25s; } .s2 { animation-delay:.4s; } .s3 { animation-delay:.55s; } .s4 { animation-delay:.7s; }
-      .label { opacity:0; animation:rise .7s cubic-bezier(0.16,1,0.3,1) forwards; }
-      .l1 { animation-delay:.34s; } .l2 { animation-delay:.49s; } .l3 { animation-delay:.64s; } .l4 { animation-delay:.79s; }
-      .divline { stroke-dasharray:74; stroke-dashoffset:74; animation:draw .7s cubic-bezier(0.16,1,0.3,1) forwards; }
-      .d1 { animation-delay:.42s; } .d2 { animation-delay:.57s; } .d3 { animation-delay:.72s; }
-      @media (prefers-reduced-motion: reduce) {
-        .stat,.label { opacity:1; animation:none; transform:none; }
-        .divline { stroke-dashoffset:0; animation:none; }
-      }
-    </style>
   </defs>
 
   <g clip-path="url(#card)">
@@ -181,9 +172,9 @@ ${stats}
     </g>
 
     <g stroke="#ffffff" stroke-opacity="0.08" stroke-linecap="round">
-      <line class="divline d1" x1="320" y1="226" x2="320" y2="300"/>
-      <line class="divline d2" x1="590" y1="226" x2="590" y2="300"/>
-      <line class="divline d3" x1="860" y1="226" x2="860" y2="300"/>
+      <line x1="320" y1="226" x2="320" y2="300"/>
+      <line x1="590" y1="226" x2="590" y2="300"/>
+      <line x1="860" y1="226" x2="860" y2="300"/>
     </g>
   </g>
 </svg>
