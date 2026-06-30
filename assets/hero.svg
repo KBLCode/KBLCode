@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" fill="none" role="img" aria-label="KBLCode — 27 stars earned, 3 public repos, 7 followers, 3 core languages">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" fill="none" role="img" aria-label="KBLCode — 27 stars earned, 2 public repos, 7 followers, 2 core languages">
   <title>KBLCode</title>
-  <desc>27 stars earned · 3 public repos · 7 followers · 3 core languages</desc>
+  <desc>27 stars earned · 2 public repos · 7 followers · 2 core languages</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
       <stop offset="0" stop-color="#0c0c10"/>
@@ -108,7 +108,7 @@
       </g>
       <text x="86" y="314" font-size="12" letter-spacing="2.5" fill="#6a6f75">STARS EARNED</text>
       <g>
-        <text x="370" y="284" font-size="100" font-weight="700" fill="#fafafa">3</text>
+        <text x="370" y="284" font-size="100" font-weight="700" fill="#fafafa">2</text>
         <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="0.40s" fill="freeze"/>
       </g>
       <text x="372" y="314" font-size="12" letter-spacing="2.5" fill="#6a6f75">PUBLIC REPOS</text>
@@ -118,7 +118,7 @@
       </g>
       <text x="642" y="314" font-size="12" letter-spacing="2.5" fill="#6a6f75">FOLLOWERS</text>
       <g>
-        <text x="910" y="284" font-size="100" font-weight="700" fill="#e0905a">3</text>
+        <text x="910" y="284" font-size="100" font-weight="700" fill="#e0905a">2</text>
         <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="0.70s" fill="freeze"/>
       </g>
       <text x="912" y="314" font-size="12" letter-spacing="2.5" fill="#9a6a48">CORE LANGUAGES</text>
